@@ -17,12 +17,13 @@ x402 uses [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) standard network iden
 
 ## Token Support
 
-x402 supports tokens on EVM, Solana, Stellar, Aptos, and Hedera networks:
+x402 supports tokens on EVM, Solana, TON, Stellar, Aptos, and Hedera networks:
 
 | Ecosystem | Supported Tokens | Transfer Method |
 |-----------|------------------|-----------------|
 | **EVM** | Any ERC-20 token | EIP-3009 or Permit2 |
 | **Solana** | Any SPL or Token-2022 token | SPL Transfer |
+| **TON (TVM)** | Any TEP-74 jetton (e.g., USDT) | Signed W5R1 internal message |
 | **Stellar** | Any Soroban token implementing SEP-41 | `transfer(from, to, amount)` |
 | **Aptos** | Any fungible asset | `primary_fungible_store::transfer` |
 | **Hedera** | HBAR or any HTS fungible token | Hedera Transfer Transaction |
@@ -34,7 +35,7 @@ Facilitators support **networks**, not specific tokens — any compatible token 
 x402 supports two asset transfer methods on EVM, selected automatically based on token capabilities:
 
 | Method | When Used | How It Works |
-|--------|-----------|--------------|
+|--------|-----------|--------------| 
 | **EIP-3009** | Tokens with `transferWithAuthorization` (e.g., USDC) | Single off-chain signature, simplest flow |
 | **Permit2** | Any ERC-20 token | Uses Uniswap's [Permit2](https://docs.uniswap.org/contracts/v4/deployments) contract + `x402ExactPermit2Proxy` |
 
@@ -103,6 +104,15 @@ When you use `"$0.01"` syntax, x402 needs to know which stablecoin to use. The f
 | Solana Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` | `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` (USDC) | 6 |
 | Solana Devnet | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` | `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU` (USDC) | 6 |
 
+### TON (TVM)
+
+| Chain | CAIP-2 | Jetton Minter | Decimals |
+|-------|--------|---------------|----------|
+| TON Mainnet | `tvm:-239` | `EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs` (USDT) | 6 |
+| TON Testnet | `tvm:-3` | `kQDNUDJC0iQvJoZp0ml-YteL1NtTXKphU03CTI5v4VtBhGYs` (USDT) | 6 |
+
+Dollar-string pricing (`"$0.01"`) is not yet supported for TVM networks. Use an explicit `AssetAmount` with the jetton minter address instead.
+
 ### Algorand (AVM)
 
 | Chain | CAIP-2 | ASA ID | Decimals |
@@ -113,14 +123,14 @@ When you use `"$0.01"` syntax, x402 needs to know which stablecoin to use. The f
 ### Stellar
 
 | Chain | CAIP-2 | Token Contract | Decimals |
-|-------|--------|---------------|----------|
+|-------|--------|----------------|----------|
 | Stellar Pubnet | `stellar:pubnet` | `CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75` (USDC) | 7 |
 | Stellar Testnet | `stellar:testnet` | `CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWFEIE3USCIHMXQDAMA` (USDC) | 7 |
 
 ### Aptos
 
 | Chain | CAIP-2 | Fungible Asset Address | Decimals |
-|-------|--------|----------------------|----------|
+|-------|--------|------------------------|----------|
 | Aptos Mainnet | `aptos:1` | `0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b` (USDC) | 6 |
 | Aptos Testnet | `aptos:2` | `0x69091fbab5f7d635ee7ac5098cf0c1efbe31d68fec0f2cd565e8d168daf52832` (USDC) | 6 |
 
@@ -265,7 +275,7 @@ Video Guide: [Adding EVM Chains to x402](https://x.com/jaycoolh/status/192085155
 
 Key takeaways:
 
-* **Any EVM chain** is supported via `eip155:<chainId>` — plus Solana, Stellar, Aptos, and Hedera
+* **Any EVM chain** is supported via `eip155:<chainId>` — plus Solana, TON, Stellar, Aptos, and Hedera
 * [Default assets](#default-assets-for-dollar-string-pricing) are a convenience for `"$0.01"` dollar-string pricing; explicit `TokenAmount` works on any chain
 * Any ERC-20 token works on any EVM facilitator (via EIP-3009 or Permit2)
 * CAIP-2 identifiers provide unambiguous cross-chain support
