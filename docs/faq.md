@@ -90,7 +90,8 @@ No. The recommended pattern is:
 The **`exact`** scheme is a _push payment_—irreversible once executed. Options:
 
 1. **Business‑logic refunds:** Seller sends a new token transfer back to the buyer.
-2. **`batch-settlement` on EVM:** Cooperative refunds and timed withdrawals from channel escrow are defined in the scheme—see [Batch settlement](/schemes/batch-settlement).
+2. **`authCapture` on EVM:** Built-in refund support via escrow (two-phase) or direct charge with refund capability (single-shot). The captureAuthorizer can void, refund, or capture within the defined deadlines—see [Auth Capture](/schemes/auth-capture).
+3. **`batch-settlement` on EVM:** Cooperative refunds and timed withdrawals from channel escrow are defined in the scheme—see [Batch settlement](/schemes/batch-settlement).
 
 ### Usage by AI Agents
 
