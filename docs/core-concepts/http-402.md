@@ -33,7 +33,7 @@ x402 V2 uses three standardized headers for payment communication:
 | `PAYMENT-SIGNATURE` | Client → Server | Base64-encoded `PaymentPayload` object |
 | `PAYMENT-RESPONSE` | Server → Client | Base64-encoded `SettlementResponse` object |
 
-* **`PAYMENT-REQUIRED`**: Contains the Base64-encoded payment requirements from the server. This header is returned alongside the 402 status code and includes details such as accepted payment schemes, price, network, and destination address.
+* **`PAYMENT-REQUIRED`**: The canonical HTTP transport location for the `PaymentRequired` object. Contains the Base64-encoded payment requirements from the server, returned alongside the 402 status code. Includes details such as accepted payment schemes, price, network, and destination address. Protocol clients should read this header rather than relying on the response body, which is a server implementation concern.
 * **`PAYMENT-SIGNATURE`**: Contains the Base64-encoded payment payload from the client. This header is sent by the client when retrying a request after receiving a 402 response, proving they have authorized payment.
 * **`PAYMENT-RESPONSE`**: Contains the Base64-encoded settlement response from the server. This header is returned by the server after attempting settlement, whether successful or failed, providing structured feedback about the payment outcome.
 
