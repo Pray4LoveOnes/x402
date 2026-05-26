@@ -205,14 +205,15 @@ The `exact` scheme has network specifications for EVM, SVM, AVM, Stellar, Aptos,
 
 ### EVM Transfer Methods
 
-The EVM implementation supports two transfer methods:
+The EVM implementation supports three transfer methods:
 
-| Method | Description |
-|--------|-------------|
-| `eip3009` | Uses token-native `transferWithAuthorization`, commonly for USDC. This is the default when supported. |
-| `permit2` | Uses Uniswap Permit2 plus the x402 exact proxy, so it can support ERC-20 tokens without EIP-3009. |
+| Method | Description | Usage Semantics |
+|--------|-------------|-----------------|
+| `eip3009` | Uses token-native `transferWithAuthorization`, commonly for USDC. This is the default when supported. | One-time use |
+| `permit2` | Uses Uniswap Permit2 plus the x402 exact proxy, so it can support ERC-20 tokens without EIP-3009. | One-time use |
+| `erc7710` | Uses ERC-7710 smart contract delegation for accounts that support it (e.g., ERC-4337 or ERC-7579 smart accounts). | One-time use and multi-use |
 
-Permit2 may require a one-time approval. The gas sponsoring extensions can let the facilitator handle that approval path for compatible tokens.
+Permit2 may require a one-time approval. The gas sponsoring extensions can let the facilitator handle that approval path for compatible tokens. ERC-7710 is suited for smart accounts with delegation support and enables both single-use and reusable payment authorizations.
 
 ### Examples
 
