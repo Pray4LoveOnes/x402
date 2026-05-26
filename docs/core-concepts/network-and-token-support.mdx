@@ -21,7 +21,7 @@ x402 supports tokens on EVM, Solana, TON, Stellar, Aptos, and Hedera networks:
 
 | Ecosystem | Supported Tokens | Transfer Method |
 |-----------|------------------|-----------------|
-| **EVM** | Any ERC-20 token | EIP-3009 or Permit2 |
+| **EVM** | Any ERC-20 token | EIP-3009, Permit2, or ERC-7710 |
 | **Solana** | Any SPL or Token-2022 token | SPL Transfer |
 | **TON (TVM)** | Any TEP-74 jetton (e.g., USDT) | Signed W5R1 internal message |
 | **Stellar** | Any Soroban token implementing SEP-41 | `transfer(from, to, amount)` |
@@ -32,14 +32,15 @@ Facilitators support **networks**, not specific tokens — any compatible token 
 
 ### EVM: Asset Transfer Methods
 
-x402 supports two asset transfer methods on EVM, selected automatically based on token capabilities:
+x402 supports three asset transfer methods on EVM, selected based on token capabilities and account type:
 
-| Method | When Used | How It Works |
-|--------|-----------|--------------|
-| **EIP-3009** | Tokens with `transferWithAuthorization` (e.g., USDC) | Single off-chain signature, simplest flow |
-| **Permit2** | Any ERC-20 token | Uses Uniswap's [Permit2](https://docs.uniswap.org/contracts/v4/deployments) contract + `x402ExactPermit2Proxy` |
+| Method | When Used | How It Works | Usage Semantics |
+|--------|-----------|--------------|-----------------|
+| **EIP-3009** | Tokens with `transferWithAuthorization` (e.g., USDC) | Single off-chain signature, simplest flow | One-time use |
+| **Permit2** | Any ERC-20 token | Uses Uniswap's [Permit2](https://docs.uniswap.org/contracts/v4/deployments) contract + `x402ExactPermit2Proxy` | One-time use |
+| **ERC-7710** | Smart accounts with delegation support (e.g., ERC-4337, ERC-7579) | Uses ERC-7710 smart contract delegation | One-time use and multi-use |
 
-Both methods provide gasless transfers (facilitator sponsors gas), signature-based authorization, and secure payments. EIP-3009 is preferred when available (simpler, no approval step). Permit2 serves as the universal fallback.
+All methods provide gasless transfers (facilitator sponsors gas) and signature-based authorization. EIP-3009 is preferred when available (simpler, no approval step). Permit2 serves as the universal fallback for any ERC-20 token. ERC-7710 is the option for smart accounts with delegation capabilities, and uniquely supports reusable (multi-use) payment authorizations.
 
 **Permit2 approval**: Requires a one-time onchain approval. x402 supports two gas sponsoring extensions that make this step gasless — see [EIP-2612 Gas Sponsoring](/extensions/eip2612-gas-sponsoring) and [ERC-20 Approval Gas Sponsoring](/extensions/erc20-approval-gas-sponsoring).
 
@@ -282,7 +283,7 @@ Key takeaways:
 
 * **Any EVM chain** is supported via `eip155:<chainId>` — plus Solana, TON (TVM), Algorand, Stellar, Aptos, and Hedera
 * [Default assets](#default-assets-for-dollar-string-pricing) are a convenience for `"$0.01"` dollar-string pricing; explicit `TokenAmount` works on any chain
-* Any ERC-20 token works on any EVM facilitator (via EIP-3009 or Permit2)
+* Any ERC-20 token works on any EVM facilitator (via EIP-3009 or Permit2); smart accounts can also use ERC-7710
 * CAIP-2 identifiers provide unambiguous cross-chain support
 
 Next, explore:
