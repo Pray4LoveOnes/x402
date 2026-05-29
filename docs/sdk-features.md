@@ -49,6 +49,8 @@ This page tracks which features are implemented in each SDK (TypeScript, Go, Pyt
 | upto | evm | `permit2` | ✅ | ✅ | ✅ |
 | batch-settlement | evm | `eip3009` | ✅ | ✅ | ✅ |
 | batch-settlement | evm | `permit2` | ✅ | ✅ | ✅ |
+| auth-capture | evm | `eip3009` | ✅ (client) | ❌ | ❌ |
+| auth-capture | evm | `permit2` | ✅ (client) | ❌ | ❌ |
 
 ## Extensions
 
