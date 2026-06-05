@@ -121,6 +121,7 @@ This page tracks which features are implemented in each SDK (TypeScript, Go, Pyt
 |---------|------------|-----|--------|
 | MCP server payment wrapper | ✅ | ✅ | ✅ |
 | MCP client (auto-pay tools) | ✅ | ✅ | ✅ |
+| MCP client x402 v1 support | ✅ | ✅ | ✅ |
 | Bazaar discovery for MCP tools | ✅ | ✅ | ✅ |
 
 ### MCP Client Hooks
