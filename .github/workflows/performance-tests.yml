@@ -1,0 +1,42 @@
+name: Performance Tests
+
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 12 * * 1'  # Weekly on Monday at 12 PM
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Run performance tests
+        run: npm run test:perf
+      
+      - name: Upload performance results
+        uses: actions/upload-artifact@v3
+        with:
+          name: perf-results
+          path: perf-results/
+      
+      - name: Comment PR with performance
+        if: github.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: perf-results-summary.txt
+          comment_tag: performance

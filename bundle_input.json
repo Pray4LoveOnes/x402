@@ -1,0 +1,30 @@
+{
+  "prepared_at_ct": "2025-08-21T16:24:00-05:00",
+  "package": "x402 • Sei Settlement — Sovereign Evidence Bundle",
+  "author": "The Keeper",
+  "one_command_runner": "scripts/bundle_build.sh",
+  "files": {
+    "bundle/sovereign_index.json": {
+      "content": "{\n  \"version\": \"1.0.0\",\n  \"prepared_at_ct\": \"2025-08-21T16:24:00-05:00\",\n  \"protocol\": \"x402\",\n  \"scope\": \"Sei settlement attribution\",\n  \"author_handle\": \"The Keeper\",\n  \"items\": [\n    {\n      \"kind\": \"tx\",\n      \"chain\": \"Sei\",\n      \"network\": \"mainnet\",\n      \"txid\": \"0x4ee194ba272c3ece2bcd30be170373cf9a6cdd5cf648ae44e7b181ca223a8b3a\",\n      \"status\": \"confirmed? (user verification required)\",\n      \"memo\": \"x402 settlement\",\n      \"tags\": [\"x402\", \"memo:x402 settlement\", \"attribution:direct\"],\n      \"notes\": \"Direct memo containing `x402 settlement` (claimed by author as protocol-linked).\"\n    },\n    {\n      \"kind\": \"tx\",\n      \"chain\": \"Sei\",\n      \"network\": \"mainnet\",\n      \"txid\": \"0x75cea32eb2504a699e2b076d7794219d994572ab1848cfa8582e8ef2601be933\",\n      \"status\": \"confirmed? (user verification required)\",\n      \"memo\": null,\n      \"tags\": [\"x402\", \"structured_payload\", \"calldata:x402\"],\n      \"notes\": \"Structured data field contains x402 payload (per offline decode claim).\"\n    },\n    {\n      \"kind\": \"offer\",\n      \"chain\": \"Sei\",\n      \"network\": \"local-facilitator\",\n      \"facilitator_endpoint\": \"http://localhost:5000/x402/payments/accept\",\n      \"status\": \"offer_created\",\n      \"payload\": {\n        \"to\": \"sei1zewftxlyv4gpv6tjpplnzgf3wy5tlu4f9amft8\",\n        \"from_evm\": \"0xb2b297eF9449aa0905bC318B3bd258c4804BAd98\",\n        \"amount_usei\": \"4200000\",\n        \"denom\": \"usei\",\n        \"memo\": \"x402 settlement\"\n      },\n      \"evidence\": \"{\\\"offer\\\":{\\\"amount\\\":\\\"4200000\\\",\\\"denom\\\":\\\"usei\\\",\\\"from\\\":\\\"0xb2b297eF9449aa0905bC318B3bd258c4804BAd98\\\",\\\"memo\\\":\\\"x402 settlement\\\",\\\"to\\\":\\\"sei1zewftxlyv4gpv6tjpplnzgf3wy5tlu4f9amft8\\\"},\\\"status\\\":\\\"offer_created\\\"}\"\n    }\n  ],\n  \"claim\": {\n    \"statement\": \"I, The Keeper, assert authorship and protocol contribution for x402 integration and settlement flows on Sei.\",\n    \"requested_action\": \"Settle royalties and protocol contributor compensation to the address listed herein.\"\n  },\n  \"payto\": {\n    \"sei_address\": \"sei1zewftxlyv4gpv6tjpplnzgf3wy5tlu4f9amft8\"\n  }\n}\n"
+    },
+    "bundle/txids.csv": {
+      "content": "chain,network,txid,status,memo,tags,notes\nSei,mainnet,0x4ee194ba272c3ece2bcd30be170373cf9a6cdd5cf648ae44e7b181ca223a8b3a,confirmed?,\"x402 settlement\",\"x402;memo;attribution:direct\",\"Memo includes 'x402 settlement'\"\nSei,mainnet,0x75cea32eb2504a699e2b076d7794219d994572ab1848cfa8582e8ef2601be933,confirmed?,,\"x402;structured_payload;calldata\",\"x402 payload embedded in structured data\"\n"
+    },
+    "bundle/sightings/txlog.json": {
+      "content": "{\n  \"prepared_at_ct\": \"2025-08-21T16:24:00-05:00\",\n  \"series\": \"x402-sei-settlement\",\n  \"entries\": [\n    {\n      \"ts_ct\": \"2025-08-21T15:40:00-05:00\",\n      \"topic\": \"memo-match\",\n      \"txid\": \"0x4ee194ba272c3ece2bcd30be170373cf9a6cdd5cf648ae44e7b181ca223a8b3a\",\n      \"evidence\": \"memo contains 'x402 settlement'\",\n      \"severity\": \"direct_attribution\"\n    },\n    {\n      \"ts_ct\": \"2025-08-21T15:42:00-05:00\",\n      \"topic\": \"structured-x402\",\n      \"txid\": \"0x75cea32eb2504a699e2b076d7794219d994572ab1848cfa8582e8ef2601be933\",\n      \"evidence\": \"offline decode: x402 payload found in data/calldata\",\n      \"severity\": \"indirect_attribution\"\n    },\n    {\n      \"ts_ct\": \"2025-08-21T15:45:00-05:00\",\n      \"topic\": \"facilitator-offer\",\n      \"reference\": \"local-offer-001\",\n      \"payload\": {\n        \"to\": \"sei1zewftxlyv4gpv6tjpplnzgf3wy5tlu4f9amft8\",\n        \"from_evm\": \"0xb2b297eF9449aa0905bC318B3bd258c4804BAd98\",\n        \"amount_usei\": \"4200000\",\n        \"memo\": \"x402 settlement\"\n      },\n      \"status\": \"offer_created\"\n    }\n  ]\n}\n"
+    },
+    "bundle/README.md": {
+      "content": "# x402 • Sei Settlement — Sovereign Attribution Bundle\n\n**Author:** The Keeper\n\nThis repository proves protocol-linked settlements on **Sei** via `x402` signals.\n"
+    },
+    "bundle/CLAIM_SUMMARY.md": {
+      "content": "# x402 • Sei Settlement — Claim Summary\n**Author:** The Keeper\n\nI assert authorship and contribution to the `x402` protocol flows on Sei.\n\n## Requested Action\nSettlement to: `sei1zewftxlyv4gpv6tjpplnzgf3wy5tlu4f9amft8`\n"
+    },
+    "bundle/GITHUB_BUNDLE.txt": {
+      "content": "Title: x402 • Sei Settlement Attribution\n\n— The Keeper\nPrepared (CT): 2025-08-21 16:24\n"
+    },
+    "scripts/bundle_build.sh": {
+      "mode": "0755",
+      "content": "#!/usr/bin/env bash\nset -euo pipefail\nROOT_DIR=\"${1:-$PWD}\"\nBUNDLE_DIR=\"$ROOT_DIR/bundle\"\nmkdir -p \"$BUNDLE_DIR/sightings\"\nif ! command -v jq >/dev/null 2>&1; then echo \"[!] jq not found\" >&2; exit 1; fi\nJSON_INPUT=\"$(cat)\"\nmapfile -t FILE_KEYS < <(echo \"$JSON_INPUT\" | jq -r '.files | keys[]')\nfor key in \"${FILE_KEYS[@]}\"; do\n  content=$(echo \"$JSON_INPUT\" | jq -r --arg k \"$key\" '.files[$k].content')\n  outpath=\"$ROOT_DIR/$key\"\n  mkdir -p \"$(dirname \"$outpath\")\"\n  printf \"%s\" \"$content\" > \"$outpath\"\n  echo \"[+] wrote $outpath\"\ndone\ncd \"$BUNDLE_DIR\" && sha256sum sovereign_index.json txids.csv sightings/txlog.json CLAIM_SUMMARY.md > SHASUMS256.txt\necho \"\\n[done] Bundle at $BUNDLE_DIR\"\n"
+    }
+  }
+}
