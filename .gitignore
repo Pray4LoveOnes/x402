@@ -52,3 +52,4 @@ REVIEW_PROMPT.md
 .omc/
 /demo/
 /contracts/tvm/
+package-lock.json
